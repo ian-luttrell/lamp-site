@@ -8,6 +8,8 @@
 
 	$login_cookie_exists = isset($_COOKIE['username']);
 
+	$logout_requested = isset($_POST['submit_logout']);
+
 	if ($login_attempted)
 	{
 		$username = $_POST['username'];
@@ -37,6 +39,14 @@
 			require 'login_header.php';
 			require 'failed_login.php';
 		}
+	}
+
+	elseif ($logout_requested)
+	{
+		setcookie('username', false, false, '/', $domain);
+		setcookie('password', false, false, '/', $domain);
+		require 'login_header.php';
+		require 'login_prompt.php';
 	}
 
 	elseif ($login_cookie_exists)

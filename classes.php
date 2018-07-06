@@ -1,4 +1,6 @@
 <?php
+	// for security reasons, deny browser access to this file with .htaccess
+	//   and put it in a non-public folder (outside of the document root)
 	class SqlTransactor
 	{
 		private $pdo;

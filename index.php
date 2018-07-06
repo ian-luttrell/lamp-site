@@ -3,20 +3,32 @@
 
 	require 'index_header.php';
 
-	$login_cookie_exists = isset($_COOKIE['username']);
+	$logged_in = isset($_COOKIE['username']);
+
+	$logout_requested = isset($_POST['submit_logout']);
+	if ($logout_requested)
+	{
+		$logged_in = False;
+	}
 
 	$user_created = isset($_POST['username']) 
 					&& $_POST['username'] != '' 
 					&& isset($_POST['password']) 
 					&& $_POST['password'] != '';
 
-	if ($login_cookie_exists)
+	if ($logged_in)
 	{
 		$username = $_COOKIE['username'];
 		include 'already_logged_in.php';
+		include 'user_creation_prompt.php';
+	}	
+	elseif ($logout_requested)
+	{
+		setcookie('username', false, false, '/', $domain);
+		setcookie('password', false, false, '/', $domain);
+		include 'user_creation_prompt.php';
 	}
-	
-    if ($user_created)
+    elseif ($user_created)
 	{
 		$conn = new SqlTransactor();
 		$username = $_POST['username'];
@@ -24,7 +36,10 @@
 		$conn->query('INSERT INTO users VALUES (NULL, ?, ?, NULL)', [$username, md5($password)]);
 		
 		include 'created_user.php';
+		include 'user_creation_prompt.php';
 	}
-
-	include 'user_creation_prompt.php';
+	else
+	{
+		include 'user_creation_prompt.php';
+	}
 ?>
