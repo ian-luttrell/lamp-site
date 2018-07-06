@@ -1,6 +1,3 @@
-<html>
-<body>
-
 <?php
 	require 'classes.php';
 
@@ -24,6 +21,3 @@
 		include 'user_creation_prompt.php';
 	}
 ?>
-
-</body>
-</html>
