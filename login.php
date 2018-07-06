@@ -1,6 +1,3 @@
-<html>
-<body>
-
 <?php
 	require 'classes.php';
 
@@ -52,8 +49,3 @@
 		include 'login_prompt.php';
 	}
 ?>
-
-
-</body>
-</html>
-	
