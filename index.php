@@ -3,32 +3,31 @@
 
 	require 'index_header.php';
 
-	$logged_in = isset($_COOKIE['username']);
+	// need to move this to a "constants" file and include it
+	$domain = 'localhost';	
 
 	$logout_requested = isset($_POST['submit_logout']);
+	
 	if ($logout_requested)
 	{
-		$logged_in = False;
+		setcookie('username', false, false, '/', $domain);
+		setcookie('password', false, false, '/', $domain);
 	}
 
+	$login_cookie_set = isset($_COOKIE['username']);
+	$logged_in = $login_cookie_set && !$logout_requested;
+	if ($logged_in)
+	{
+		$username = $_COOKIE['username'];
+		include 'already_logged_in.php';
+	}	
+    
 	$user_created = isset($_POST['username']) 
 					&& $_POST['username'] != '' 
 					&& isset($_POST['password']) 
 					&& $_POST['password'] != '';
 
-	if ($logged_in)
-	{
-		$username = $_COOKIE['username'];
-		include 'already_logged_in.php';
-		include 'user_creation_prompt.php';
-	}	
-	elseif ($logout_requested)
-	{
-		setcookie('username', false, false, '/', $domain);
-		setcookie('password', false, false, '/', $domain);
-		include 'user_creation_prompt.php';
-	}
-    elseif ($user_created)
+	if ($user_created)
 	{
 		$conn = new SqlTransactor();
 		$username = $_POST['username'];

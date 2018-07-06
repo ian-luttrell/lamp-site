@@ -40,7 +40,6 @@
 			require 'failed_login.php';
 		}
 	}
-
 	elseif ($logout_requested)
 	{
 		setcookie('username', false, false, '/', $domain);
@@ -48,14 +47,12 @@
 		require 'login_header.php';
 		require 'login_prompt.php';
 	}
-
 	elseif ($login_cookie_exists)
 	{
 		$username = $_COOKIE['username'];
 		require 'login_header.php';
 		require 'already_logged_in.php';
 	}
-
 	else
 	{
 		require 'login_header.php';
