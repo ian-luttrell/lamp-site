@@ -1,6 +1,9 @@
 <?php
 	require 'classes.php';
 
+	// need to move this to a "constants" file and include it
+	$domain = 'localhost';
+
 	$login_attempted = isset($_POST['username']) 
 				        && !empty($_POST['username']) 
 						&& isset($_POST['password']) 
