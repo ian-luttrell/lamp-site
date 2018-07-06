@@ -1,12 +1,20 @@
 <?php
 	require 'classes.php';
 
+	$login_cookie_exists = isset($_COOKIE['username']);
+
 	$user_created = isset($_POST['username']) 
 					&& $_POST['username'] != '' 
 					&& isset($_POST['password']) 
 					&& $_POST['password'] != '';
 
-	if ($user_created)
+	if ($login_cookie_exists)
+	{
+		$username = $_COOKIE['username'];
+		include 'already_logged_in.php';
+	}
+	
+    if ($user_created)
 	{
 		$conn = new SqlTransactor();
 		$username = $_POST['username'];
@@ -16,8 +24,5 @@
 		include 'created_user.php';
 	}
 
-	else
-	{
-		include 'user_creation_prompt.php';
-	}
+	include 'user_creation_prompt.php';
 ?>
