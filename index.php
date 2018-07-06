@@ -1,6 +1,8 @@
 <?php
 	require 'classes.php';
 
+	require 'index_header.php';
+
 	$login_cookie_exists = isset($_COOKIE['username']);
 
 	$user_created = isset($_POST['username']) 

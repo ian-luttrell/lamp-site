@@ -34,18 +34,21 @@
 		}
 		else
 		{
-			include 'failed_login.php';
+			require 'login_header.php';
+			require 'failed_login.php';
 		}
 	}
 
 	elseif ($login_cookie_exists)
 	{
 		$username = $_COOKIE['username'];
-		include 'already_logged_in.php';
+		require 'login_header.php';
+		require 'already_logged_in.php';
 	}
 
 	else
 	{
-		include 'login_prompt.php';
+		require 'login_header.php';
+		require 'login_prompt.php';
 	}
 ?>
