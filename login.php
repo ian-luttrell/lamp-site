@@ -4,7 +4,14 @@
 <?php
 	require 'classes.php';
 
-	if (isset($_POST['username']) && !empty($_POST['username']) && isset($_POST['password']) && !empty($_POST['password']))
+	$login_attempted = isset($_POST['username']) 
+				        && !empty($_POST['username']) 
+						&& isset($_POST['password']) 
+						&& !empty($_POST['password']);
+
+	$login_cookie_exists = isset($_COOKIE['username']);
+
+	if ($login_attempted)
 	{
 		$username = $_POST['username'];
 		$password = $_POST['password'];
@@ -30,34 +37,19 @@
 		}
 		else
 		{
-			echo '
-			<form action="login.php" method="post">
-			<input type="text" name="username">
-			<button type="submit" name="submit_login">Log In</button>
-			<br>
-			<input type="password" name="password">
-			</form>
-			';
-		
-			echo '<br>Failed login.';
+			include 'failed_login.php';
 		}
 	}
 
-	else if (isset($_COOKIE['username']))
+	elseif ($login_cookie_exists)
 	{
-		echo "Already logged in.";
+		$username = $_COOKIE['username'];
+		include 'already_logged_in.php';
 	}
 
 	else
 	{
-		echo '
-			<form action="login.php" method="post">
-			<input type="text" name="username">
-			<button type="submit" name="submit_login">Log In</button>
-			<br>
-			<input type="password" name="password">
-			</form>
-			';
+		include 'login_prompt.php';
 	}
 ?>
 
