@@ -35,7 +35,7 @@
 			$domain = 'localhost';
 			setcookie('username', $username, false, '/', $domain);
 			setcookie('password', $hashed_password, false, '/', $domain);
-			header('Location: http://' . $domain .'/index.php');
+			header('Location: https://' . $domain .'/index.php');
 		}
 		else
 		{
