@@ -19,8 +19,8 @@
 		$password = $_POST['password'];
 		$hashed_password = md5($password);
 		$valid_login = False;
-		$db = new SqlTransactor();
-		$result_set = $db->query('SELECT username,password FROM users', []);
+		$db = new QueryBuilder();
+		$result_set = $db->select_all('users');
 		foreach ($result_set as $row)
 		{
 			if ($row['username'] == $username && $row['password'] == $hashed_password)

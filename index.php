@@ -29,10 +29,14 @@
 
 	if ($user_created)
 	{
-		$conn = new SqlTransactor();
+		$conn = new QueryBuilder();
 		$username = $_POST['username'];
 		$password = $_POST['password'];
-		$conn->query('INSERT INTO users VALUES (NULL, ?, ?, NULL)', [$username, md5($password)]);
+		$conn->insert('users', 
+						array('id' => NULL, 
+							'username' => $username, 
+							'password' => md5($password), 
+							'created_at' => NULL));
 		
 		include 'created_user.php';
 		include 'user_creation_prompt.php';

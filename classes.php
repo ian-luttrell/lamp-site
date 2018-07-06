@@ -1,7 +1,7 @@
 <?php
 	// for security reasons, deny browser access to this file with .htaccess
 	//   and put it in a non-public folder (outside of the document root)
-	class SqlTransactor
+	class QueryBuilder
 	{
 		private $pdo;
 		
@@ -18,14 +18,34 @@
 				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 				PDO::ATTR_EMULATE_PREPARES   => false,
 			];
-			$this->pdo = new PDO($dsn, $user, $pass, $opt);
+
+			try {
+				$this->pdo = new PDO($dsn, $user, $pass, $opt);
+			} catch (PDOException $e) {
+				die('Could not connect to database.');
+			}
+
 		}
 
-		public function query($sql, $val_array) {
+		public function select_all($table) {
+			$sql = "SELECT * FROM {$table}";
 			$stmt = $this->pdo->prepare($sql);
-			$stmt->execute($val_array);
+			$stmt->execute();
 		
 			return $stmt;
+		}
+
+		public function insert($table, $parameters) {
+			$col_names = implode(', ', array_keys($parameters));
+			$values = ':' . implode(', :', array_keys($parameters));
+			$sql = sprintf("INSERT INTO %s (%s) VALUES (%s)", $table, $col_names, $values);
+			
+			try {
+				$stmt = $this->pdo->prepare($sql);
+				$stmt->execute($parameters);
+			} catch (PDOException $e) {
+				die('Database insert error.');
+			}
 		}
 	}
 ?>
