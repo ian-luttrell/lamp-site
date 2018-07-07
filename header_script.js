@@ -8,15 +8,15 @@ function makeCurrentLinkActive(pageFilename)
 	var navbarDivColl = document.getElementsByClassName('topnav');
 	var navbarDiv = navbarDivColl[0];
 	var anchorColl = navbarDiv.getElementsByTagName('a');
-	for (i = 0; i < anchorColl.length; i++)
-	{
-		var currAnchor = anchorColl[i];
-		var anchorPage = currAnchor.getAttribute('href');
+	// ES6 spread notation may not be universally supported
+	var anchorArr = [...anchorColl];
+	anchorArr.forEach(anchor => {
+		var anchorPage = anchor.getAttribute('href');
 		if (anchorPage == pageFilename)
 		{
-			currAnchor.classList.add('active');
+			anchor.classList.add('active');
 		}
-	}
+	});
 }
 
 function setPageTitle(pageFilename)
@@ -24,16 +24,16 @@ function setPageTitle(pageFilename)
 	var navbarDivColl = document.getElementsByClassName('topnav');
 	var navbarDiv = navbarDivColl[0];
 	var anchorColl = navbarDiv.getElementsByTagName('a');
-	for (i = 0; i < anchorColl.length; i++)
-	{
-		var currAnchor = anchorColl[i];
-		var anchorPage = currAnchor.getAttribute('href');
+	// ES6 spread notation may not be universally supported
+	var anchorArr = [...anchorColl];
+	anchorArr.forEach(anchor => {
+		var anchorPage = anchor.getAttribute('href');
 		if (anchorPage == pageFilename)
 		{
-			var currPageLabel = currAnchor.innerHTML;
+			var currPageLabel = anchor.innerHTML;
 			document.title = "Ian's Site: " + currPageLabel;
 		}
-	}
+	});
 }
 
 makeCurrentLinkActive(currentPageFilename);
