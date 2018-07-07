@@ -1,6 +1,6 @@
 
 var pathArray = window.location.pathname.split('/');
-var page = pathArray[pathArray.length - 1];
+var currentPageFilename = pathArray[pathArray.length - 1];
 
 
 function makeCurrentLinkActive(pageFilename)
@@ -19,17 +19,4 @@ function makeCurrentLinkActive(pageFilename)
 	}
 }
 
-
-switch(page) {
-	case 'index.php':
-		makeCurrentLinkActive('index.php');
-		break;
-
-	case 'login.php':
-		makeCurrentLinkActive('login.php');
-		break;
-
-	case 'prime_factorization.php':
-		makeCurrentLinkActive('prime_factorization.php');
-		break;
-}
+makeCurrentLinkActive(currentPageFilename);
