@@ -1,4 +1,4 @@
 <?php
-	require 'nav_header.php';
-	?> <script src='navbar_script.js'></script> <?php
+	require 'header.php';
+	?> <script src='header_script.js'></script> <?php
 ?>
