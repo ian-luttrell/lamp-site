@@ -1,8 +1,10 @@
+
 <?php
 	require 'classes.php';
 
-	require 'index_header.php';
-
+	require 'nav_header.php';
+	?> <script src='navbar_script.js'></script> <?php
+	
 	// need to move this to a "constants" file and include it
 	$domain = 'localhost';	
 

@@ -1,5 +1,9 @@
+
 <?php
 	require 'classes.php';
+
+	require 'nav_header.php';
+	?> <script src='navbar_script.js'></script> <?php
 
 	// need to move this to a "constants" file and include it
 	$domain = 'localhost';
@@ -39,7 +43,6 @@
 		}
 		else
 		{
-			require 'login_header.php';
 			require 'failed_login.php';
 		}
 	}
@@ -47,18 +50,15 @@
 	{
 		setcookie('username', false, false, '/', $domain);
 		setcookie('password', false, false, '/', $domain);
-		require 'login_header.php';
 		require 'login_prompt.php';
 	}
 	elseif ($login_cookie_exists)
 	{
 		$username = $_COOKIE['username'];
-		require 'login_header.php';
 		require 'already_logged_in.php';
 	}
 	else
 	{
-		require 'login_header.php';
 		require 'login_prompt.php';
 	}
 ?>
