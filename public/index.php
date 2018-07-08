@@ -1,5 +1,7 @@
 
 <?php
+	// this file will implement the front controller
+
 	require '../Core/Router.php';
 	$router = new Router();
 	$router->addRoute('', ['controller' => 'CreateAccount', 'action' => 'index']);
