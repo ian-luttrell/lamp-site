@@ -1,5 +1,10 @@
 
 <?php
+	require '../Core/Router.php';
+	$router = new Router();
+	$router->addRoute('', ['controller' => 'CreateAccount', 'action' => 'index']);
+	$url = $_SERVER['QUERY_STRING'];
+		
 	require 'classes.php';
 
 	require 'header.php';
