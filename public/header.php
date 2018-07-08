@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class="topnav">
-	<a href="index.php">Create Account</a>
+	<a href="create_account.php">Create Account</a>
 	<a href="login.php">Login</a>
 	<a href="prime_factorization.php">Prime Factorization</a>
 	</div>

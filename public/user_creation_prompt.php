@@ -1,7 +1,7 @@
 <html>
 <body>
 
-<form action="index.php" method="post">
+<form action="create_account.php" method="post">
 	<input type="text" name="username">
 	<br>
 	<input type="password" name="password">
