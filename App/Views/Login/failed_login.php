@@ -1,13 +1,21 @@
+<?php
+
+require 'header.php';
+
+?>
+
 <html>
 <body>
 
-<form action="create_account.php" method="post">
+<form action="/login/submit" method="post">
 	<input type="text" name="username">
 	<br>
 	<input type="password" name="password">
 	<br><br>
-	<button type="submit">Create User</button>
+	<button type="submit">Log In</button>
 </form>
+
+Failed login.
 
 </body>
 </html>

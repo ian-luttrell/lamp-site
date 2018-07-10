@@ -1,9 +1,10 @@
 
+
 var pathArray = window.location.pathname.split('/');
-var currentPageFilename = pathArray[pathArray.length - 1];
+var currentUrlStem = pathArray[pathArray.length - 1];
 
 
-function makeCurrentLinkActive(pageFilename)
+function makeCurrentLinkActive(pageName)
 {
 	var navbarDivColl = document.getElementsByClassName('topnav');
 	var navbarDiv = navbarDivColl[0];
@@ -12,14 +13,14 @@ function makeCurrentLinkActive(pageFilename)
 	var anchorArr = [...anchorColl];
 	anchorArr.forEach(anchor => {
 		var anchorPage = anchor.getAttribute('href');
-		if (anchorPage == pageFilename)
+		if (anchorPage == pageName)
 		{
 			anchor.classList.add('active');
 		}
 	});
 }
 
-function setPageTitle(pageFilename)
+function setPageTitle(pageName)
 {
 	var navbarDivColl = document.getElementsByClassName('topnav');
 	var navbarDiv = navbarDivColl[0];
@@ -28,7 +29,7 @@ function setPageTitle(pageFilename)
 	var anchorArr = [...anchorColl];
 	anchorArr.forEach(anchor => {
 		var anchorPage = anchor.getAttribute('href');
-		if (anchorPage == pageFilename)
+		if (anchorPage == pageName)
 		{
 			var currPageLabel = anchor.innerHTML;
 			document.title = "Ian's Site: " + currPageLabel;
@@ -36,5 +37,5 @@ function setPageTitle(pageFilename)
 	});
 }
 
-makeCurrentLinkActive(currentPageFilename);
-setPageTitle(currentPageFilename);
+makeCurrentLinkActive(currentUrlStem);
+setPageTitle(currentUrlStem);
