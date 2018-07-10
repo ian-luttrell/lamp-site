@@ -11,7 +11,7 @@
 	$router->addRoute('show-all-users', ['controller' => 'Test', 'action' => 'showAllUsers']);
 	$router->addRoute('login', ['controller' => 'Login', 'action' => 'index']);
 	$router->addRoute('login/submit', ['controller' => 'Login', 'action' => 'submit']);
-	$router->addRoute('logout', ['controller' => 'Login', 'action' => 'logout']);
+	$router->addRoute('log-out', ['controller' => 'Login', 'action' => 'logOut']);
 	$router->addRoute('prime-factorization', ['controller' => 'PrimeFactorization', 'action' => 'index']);
 	
 	$url = $_SERVER['QUERY_STRING'];

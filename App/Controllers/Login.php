@@ -31,19 +31,19 @@ class Login
 
 			$data = ['username' => $escapedUsername];
 			$view = '../App/Views/Login/successful_login.php';
-			View::render($view, $data);		
+			View::render($view, $data);	
 		} else {
 			$view = '../App/Views/Login/failed_login.php';
 			View::render($view, []);
-		}
+		}	
 	}
 
-	public function logout()
+	public function logOut()
 	{
 		session_start();
-		session_unset();
+		$_SESSION = [];
 		session_destroy();
-		
+				
 		$view = '../App/Views/Login/index.php';
 		View::render($view, []);
 	}

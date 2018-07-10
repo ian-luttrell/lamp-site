@@ -6,8 +6,11 @@ class PrimeFactorization
 {
 	public function index()
 	{
-		session_start();
-		if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+
+		if (isset($_SESSION['user'])) {
 			$view = '../App/Views/PrimeFactorization/prime_logged_in.php';
 			View::render($view, []);
 		} else {

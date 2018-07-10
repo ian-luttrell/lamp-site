@@ -7,13 +7,16 @@
 </head>
 <body>
 	<?php
-		session_start();
-		if (isset($_SESSION['user']) && !empty($_SESSION['user'])) {
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+
+		if (isset($_SESSION['user'])) {
 			$username = $_SESSION['user'];
 			echo "Logged in as {$username}";
 
 			require 'logout_form.php';
-		}
+		} 
 	?>
 
 	<div class="topnav">
