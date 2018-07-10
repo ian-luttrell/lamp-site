@@ -1,5 +1,9 @@
 <?php
 
+// Config.php is a configuration file in the App directory containing
+//   sensitive database login information, so it is NOT posted on GitHub
+require_once('../App/Config.php');
+
 class QueryBuilder
 {
 	protected $pdo;
