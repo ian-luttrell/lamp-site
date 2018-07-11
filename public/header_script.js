@@ -12,7 +12,7 @@ function makeCurrentLinkActive(pageName)
 	// ES6 spread notation may not be universally supported
 	var anchorArr = [...anchorColl];
 	anchorArr.forEach(anchor => {
-		var anchorPage = anchor.getAttribute('href');
+		var anchorPage = anchor.getAttribute('href').replace('/', '');
 		if (anchorPage == pageName)
 		{
 			anchor.classList.add('active');
@@ -28,7 +28,7 @@ function setPageTitle(pageName)
 	// ES6 spread notation may not be universally supported
 	var anchorArr = [...anchorColl];
 	anchorArr.forEach(anchor => {
-		var anchorPage = anchor.getAttribute('href');
+		var anchorPage = anchor.getAttribute('href').replace('/', '');
 		if (anchorPage == pageName)
 		{
 			var currPageLabel = anchor.innerHTML;
