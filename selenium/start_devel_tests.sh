@@ -4,7 +4,11 @@
 
 # "ian" needs to be replaced with whichever non-root user is
 #     executing the test runner and python test scripts
-
+if [[ $EUID -ne 0 ]]
+then
+	echo "start_devel_tests.sh: must be run with sudo/root privileges"
+	exit
+fi
 
 
 # change project owner and group to www-data so that Apache can serve
@@ -21,8 +25,8 @@ chown ian:ian ~/e2e*.py
 
 
 # start test runner
-cd ~
 # NOTE: geckodriver executable must be in root's PATH
+cd ~
 su -c ./devel_tests.sh -m ian
 
 
