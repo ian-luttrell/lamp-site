@@ -1,18 +1,24 @@
 
 
-var pathArray = window.location.pathname.split('/');
-var currentUrlStem = pathArray[pathArray.length - 1];
+let pathArray = window.location.pathname.split('/');
+let currentUrlStem = pathArray[pathArray.length - 1];
+
+
+function getNavbarAnchors() {
+	let navbarDivColl = document.getElementsByClassName('topnav');
+	let navbarDiv = navbarDivColl[0];
+	let anchorColl = navbarDiv.getElementsByTagName('a');
+
+	// ES6 spread notation may not be universally supported
+	return [...anchorColl];
+}
 
 
 function makeCurrentLinkActive(pageName)
 {
-	var navbarDivColl = document.getElementsByClassName('topnav');
-	var navbarDiv = navbarDivColl[0];
-	var anchorColl = navbarDiv.getElementsByTagName('a');
-	// ES6 spread notation may not be universally supported
-	var anchorArr = [...anchorColl];
+	let anchorArr = getNavbarAnchors();
 	anchorArr.forEach(anchor => {
-		var anchorPage = anchor.getAttribute('href').replace('/', '');
+		let anchorPage = anchor.getAttribute('href').replace('/', '');
 		if (anchorPage == pageName)
 		{
 			anchor.classList.add('active');
@@ -20,22 +26,20 @@ function makeCurrentLinkActive(pageName)
 	});
 }
 
+
 function setPageTitle(pageName)
 {
-	var navbarDivColl = document.getElementsByClassName('topnav');
-	var navbarDiv = navbarDivColl[0];
-	var anchorColl = navbarDiv.getElementsByTagName('a');
-	// ES6 spread notation may not be universally supported
-	var anchorArr = [...anchorColl];
+	let anchorArr = getNavbarAnchors();
 	anchorArr.forEach(anchor => {
-		var anchorPage = anchor.getAttribute('href').replace('/', '');
+		let anchorPage = anchor.getAttribute('href').replace('/', '');
 		if (anchorPage == pageName)
 		{
-			var currPageLabel = anchor.innerHTML;
+			let currPageLabel = anchor.innerHTML;
 			document.title = "Ian's Site: " + currPageLabel;
 		}
 	});
 }
+
 
 makeCurrentLinkActive(currentUrlStem);
 setPageTitle(currentUrlStem);
