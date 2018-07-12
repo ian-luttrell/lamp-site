@@ -4,15 +4,10 @@ require_once('../Core/Model.php');
 
 class LoginModel extends Model
 {
-	public static function escapeUsername($username)
+	public static function authenticate($credentials)
 	{
-		return(htmlspecialchars($username));
-	}
-
-	public static function authenticate($processedCred)
-	{
-		$username = $processedCred['username'];
-		$password = $processedCred['password'];
+		$username = $credentials['username'];
+		$password = $credentials['password'];
 		
 		$conn = static::getConn();
 		

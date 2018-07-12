@@ -13,7 +13,7 @@
 
 		if (isset($_SESSION['user'])) {
 			$username = $_SESSION['user'];
-			echo "Logged in as {$username}";
+			echo "Logged in as " . htmlspecialchars($username);
 
 			require 'logout_form.php';
 		} 

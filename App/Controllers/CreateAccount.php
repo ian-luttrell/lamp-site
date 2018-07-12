@@ -12,16 +12,12 @@ class CreateAccount
 
 	public function submit()
 	{
-		// pass registration credentials to model for processing
 		$cred = ['username' => $_POST['username'],
 					'password' => $_POST['password']];
-		$processed_cred = CreateAccountModel::processCredentials($cred);
+			
+		CreateAccountModel::register($cred); 
 		
-		// pass processed credentials to model for account creation		
-		CreateAccountModel::register($processed_cred); 
-		
-		$username = $processed_cred['username'];
-		$data = ['username' => $username];
+		$data = ['username' => $cred['username']];
 		$view = '../App/Views/CreateAccount/submit.php';
 		View::render($view, $data);
 	}

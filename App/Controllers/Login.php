@@ -16,20 +16,12 @@ class Login
 		$cred = ['username' => $_POST['username'],
 					'password' => $_POST['password']];
 
-		// pass supplied username to model for escaping
-		$username = $cred['username'];
-		$escapedUsername = LoginModel::escapeUsername($username);
-		$password = $_POST['password'];
-		$processedCred = ['username' => $escapedUsername,
-							'password' => $password];		
-
-		// pass processed credentials to model for authentication
-		$validLogin = LoginModel::authenticate($processedCred); 
+		$validLogin = LoginModel::authenticate($cred); 
 		if ($validLogin) {
 			session_start();
-			$_SESSION['user'] = $escapedUsername;
+			$_SESSION['user'] = $cred['username'];
 
-			$data = ['username' => $escapedUsername];
+			$data = ['username' => $cred['username']];
 			$view = '../App/Views/Login/successful_login.php';
 			View::render($view, $data);	
 		} else {
