@@ -19,41 +19,41 @@ class CheckXss(unittest.TestCase):
     
     def test_check_xss(self):
         driver = self.driver
-        driver.get("https://ianluttrell.com/")
+        driver.get("https://localhost/")
         driver.find_element_by_link_text("Create Account").click()
         driver.find_element_by_name("username").click()
         driver.find_element_by_name("username").clear()
-        driver.find_element_by_name("username").send_keys("<a href=https://ianluttrell.com>XSS Hack!</a>")
+        driver.find_element_by_name("username").send_keys("<a href=https://localhost>XSS Hack!</a>")
         driver.find_element_by_name("password").click()
         driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("testxss")
         driver.find_element_by_xpath("//button[@type='submit']").click()
 
-        self.assertEqual("Create Account\nLogin\nPrime Factorization\n\n\nCreated user <a href=https://ianluttrell.com>XSS Hack!</a>.",
+        self.assertEqual("Create Account\nLogin\nPrime Factorization\n\n\nCreated user <a href=https://localhost>XSS Hack!</a>.",
                             driver.find_element_by_xpath("//html").text)
 
         driver.find_element_by_link_text("Login").click()
         driver.find_element_by_name("username").click()
         driver.find_element_by_name("username").clear()
-        driver.find_element_by_name("username").send_keys("<a href=https://ianluttrell.com>XSS Hack!</a>")
+        driver.find_element_by_name("username").send_keys("<a href=https://localhost>XSS Hack!</a>")
         driver.find_element_by_name("password").click()
         driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("testxss")
         driver.find_element_by_xpath("//button[@type='submit']").click()
 
         self.assertEqual("Logged in as "
-                            "<a href=https://ianluttrell.com>XSS Hack!</a>"
+                            "<a href=https://localhost>XSS Hack!</a>"
                             "\nLog Out\nCreate Account\nLogin\n"
-                            "Prime Factorization\n\n\nSucccessfully logged in "
-                            "as <a href=https://ianluttrell.com>XSS Hack!</a>.", 
+                            "Prime Factorization\n\n\nSuccessfully logged in "
+                            "as <a href=https://localhost>XSS Hack!</a>.", 
                             driver.find_element_by_xpath("//html").text)
 
         driver.find_element_by_link_text("Prime Factorization").click()
         self.assertEqual("Logged in as "
-                            "<a href=https://ianluttrell.com>XSS Hack!</a>\n"
+                            "<a href=https://localhost>XSS Hack!</a>\n"
                             "Log Out\nCreate Account\nLogin\nPrime Factorization"
                             "\n\n\nWelcome to the prime factorization utility, "
-                            "<a href=https://ianluttrell.com>XSS Hack!</a>.",
+                            "<a href=https://localhost>XSS Hack!</a>.",
                             driver.find_element_by_xpath("//html").text)
 
         driver.find_element_by_xpath("//button[@type='submit']").click()

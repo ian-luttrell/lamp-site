@@ -20,7 +20,7 @@ class CreateAccountLogIn(unittest.TestCase):
     def test_create_account_log_in(self):
         driver = self.driver
   
-        driver.get("https://ianluttrell.com")
+        driver.get("https://localhost")
         driver.find_element_by_link_text("Create Account").click()
        
         print(driver.find_element_by_xpath("//html").text)
@@ -44,7 +44,7 @@ class CreateAccountLogIn(unittest.TestCase):
         driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("testpass")
         driver.find_element_by_xpath("//button[@type='submit']").click()
-        self.assertEqual("Logged in as selenium\nLog Out\nCreate Account\nLogin\nPrime Factorization\n\n\nSucccessfully logged in as selenium.",             
+        self.assertEqual("Logged in as selenium\nLog Out\nCreate Account\nLogin\nPrime Factorization\n\n\nSuccessfully logged in as selenium.",             
                             driver.find_element_by_xpath("//html").text)
         driver.find_element_by_xpath("//button[@type='submit']").click()
         self.assertEqual("Create Account\nLogin\nPrime Factorization\n\n\n\n\n\nLog In", driver.find_element_by_xpath("//html").text)
