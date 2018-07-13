@@ -19,7 +19,7 @@ class CheckPrimeFactLogin(unittest.TestCase):
     
     def test_check_prime_fact_login(self):
         driver = self.driver
-        driver.get("https://localhost/")
+        driver.get("http://localhost")
         driver.find_element_by_link_text("Login").click()
         driver.find_element_by_name("username").click()
         driver.find_element_by_name("username").clear()

@@ -42,7 +42,7 @@ then
 	# clean up database
 	mysql -e "DELETE FROM test.users WHERE username = 'selenium';"
 	mysql -e "DELETE FROM test.users WHERE username =\
-				'<a href=https://localhost>XSS Hack!</a>';"
+				'<a href=http://localhost>XSS Hack!</a>';"
 	exit
 fi
 
@@ -50,6 +50,6 @@ fi
 # clean up database
 mysql -e "DELETE FROM test.users WHERE username = 'selenium';"
 mysql -e "DELETE FROM test.users WHERE username =\
-			'<a href=https://localhost>XSS Hack!</a>';"
+			'<a href=http://localhost>XSS Hack!</a>';"
 
 echo "All tests passed!"

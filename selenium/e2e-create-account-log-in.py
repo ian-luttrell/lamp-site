@@ -20,7 +20,7 @@ class CreateAccountLogIn(unittest.TestCase):
     def test_create_account_log_in(self):
         driver = self.driver
   
-        driver.get("https://localhost")
+        driver.get("http://localhost")
         driver.find_element_by_link_text("Create Account").click()
        
         print(driver.find_element_by_xpath("//html").text)
