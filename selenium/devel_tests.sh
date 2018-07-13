@@ -19,7 +19,7 @@ then
 fi
 
 
-# run tests to check logged-in vs. logged-out behavior of 
+# run test to check logged-in vs. logged-out behavior of 
 #   prime factorization page
 python3 e2e-check-prime-fact-login.py
 rv=$?
@@ -31,25 +31,21 @@ then
 fi
 
 
-# run tests to check for cross-site scripting (XSS) vulnerabilities
-python3 e2e-check-xss.py
+# run test to check for username code injection vulnerability
+python3 e2e-check-username-code-injection.py
 rv=$?
 if [[ $rv -ne 0 ]]
 then
-	echo "Failed cross-site scripting test: exiting"
+	echo "Failed username code injection test: exiting"
 	echo "*** There might be security vulnerabilities ***"
 
 	# clean up database
 	mysql -e "DELETE FROM test.users WHERE username = 'selenium';"
-	mysql -e "DELETE FROM test.users WHERE username =\
-				'<a href=http://localhost>XSS Hack!</a>';"
 	exit
 fi
 
 
 # clean up database
 mysql -e "DELETE FROM test.users WHERE username = 'selenium';"
-mysql -e "DELETE FROM test.users WHERE username =\
-			'<a href=http://localhost>XSS Hack!</a>';"
 
 echo "All tests passed!"

@@ -10,16 +10,27 @@ class CreateAccount
 		View::render($view, []);
 	}
 
+	public function validateUsername($attemptedUsername)
+	{
+		return ctype_alnum($attemptedUsername);
+	}
+
 	public function submit()
 	{
 		$cred = ['username' => $_POST['username'],
 					'password' => $_POST['password']];
-			
-		CreateAccountModel::register($cred); 
 		
-		$data = ['username' => $cred['username']];
-		$view = '../App/Views/CreateAccount/submit.php';
-		View::render($view, $data);
+		$usernameValid = static::validateUsername($cred['username']);
+		if ($usernameValid) {
+			CreateAccountModel::register($cred); 
+			
+			$data = ['username' => $cred['username']];
+			$view = '../App/Views/CreateAccount/submit.php';
+			View::render($view, $data);
+		} else {
+			$view = '../App/Views/CreateAccount/invalid_username.php';
+			View::render($view, []);
+		}
 	}
 }
 
