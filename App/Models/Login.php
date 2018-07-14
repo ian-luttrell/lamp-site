@@ -9,7 +9,7 @@ class LoginModel extends Model
 		$username = $credentials['username'];
 		$password = $credentials['password'];
 				
-		$sql = 'SELECT * FROM users WHERE username=:username';		
+		$sql = 'SELECT * FROM users WHERE BINARY username=:username';		
 		$params = ['username' => $username];
 		
 		$db = static::getDbHandle();
