@@ -10,6 +10,10 @@ class CreateAccountModel extends Model
 		$hashed_password = password_hash($credentials['password'], 
 											PASSWORD_DEFAULT);
 		
+		# WARNING: username column must have type VARCHAR BINARY
+		#   (so that this query is case sensitive).
+		# The hashed_password column can just be VARCHAR(255), because
+		#   the hashing is case-sensitive.
 		$sql = 'INSERT INTO users (id, username, hashed_password, created_at)' .
 				' VALUES (:id, :username, :hashed_password, :created_at);';
 	
