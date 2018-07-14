@@ -15,7 +15,7 @@
 			$username = $_SESSION['user'];
 			echo "Logged in as " . htmlspecialchars($username);
 
-			require 'logout_form.php';
+			require 'account_options_form.php';
 		} 
 	?>
 

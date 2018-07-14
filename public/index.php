@@ -2,6 +2,7 @@
 	require_once('../App/Controllers/CreateAccount.php');
 	require_once('../App/Controllers/Login.php');
 	require_once('../App/Controllers/PrimeFactorization.php');
+	require_once('../App/Controllers/DeleteAccount.php');
 
 	require '../Core/Router.php';
 	$router = new Router();
@@ -13,6 +14,7 @@
 	$router->addRoute('login/submit', ['controller' => 'Login', 'action' => 'submit']);
 	$router->addRoute('log-out', ['controller' => 'Login', 'action' => 'logOut']);
 	$router->addRoute('prime-factorization', ['controller' => 'PrimeFactorization', 'action' => 'index']);
+	$router->addRoute('delete-account', ['controller' => 'DeleteAccount', 'action' => 'index']);
 	
 	$url = $_SERVER['QUERY_STRING'];
 	$router->dispatchRoute($url);
