@@ -15,7 +15,7 @@ require 'header.php';
 	<button type="submit">Create User</button>
 </form>
 
-Your username must contain letters or digits <b>only<b>.
+<?= $data['invalid_credentials_description'] ?>
 
 </body>
 </html>
