@@ -10,14 +10,17 @@ class CreateAccountModel extends Model
 		$hashed_password = password_hash($credentials['password'], 
 											PASSWORD_DEFAULT);
 		
-		$record = ['id' => NULL, 
+		$sql = 'INSERT INTO users (id, username, hashed_password, created_at)' .
+				' VALUES (:id, :username, :hashed_password, :created_at);';
+	
+		$params = ['id' => NULL, 
 					'username' => $username, 
 					'hashed_password' => $hashed_password, 
 					'created_at' => NULL];
-		
-		$conn = static::getConn();
-		$db = new QueryBuilder($conn);
-		$db->insert('users', $record);
+
+		$db = static::getDbHandle();		
+		$stmt = $db->prepare($sql);
+		$stmt->execute($params);
 	}
 		 
 }
