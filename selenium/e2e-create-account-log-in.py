@@ -33,9 +33,17 @@ class CreateAccountLogIn(unittest.TestCase):
         driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("testpass")
         driver.find_element_by_xpath("//button[@type='submit']").click()
-        self.assertEqual("Create Account\nLogin\nPrime Factorization\n\n\nCreated user selenium.", driver.find_element_by_xpath("//html").text)
+
+        self.assertEqual("Create Account\nLogin\nPrime Factorization"
+                            "\n\n\nCreated user selenium.",
+                            driver.find_element_by_xpath("//html").text)
+
         driver.find_element_by_link_text("Login").click()
-        self.assertEqual("Create Account\nLogin\nPrime Factorization\n\n\n\n\n\nLog In", driver.find_element_by_xpath("//html").text)
+
+        self.assertEqual("Create Account\nLogin\nPrime Factorization"
+                            "\n\n\n\n\n\nLog In",
+                            driver.find_element_by_xpath("//html").text)
+
         driver.find_element_by_name("username").click()
         driver.find_element_by_name("username").clear()
         driver.find_element_by_name("username").send_keys("selenium")
@@ -43,10 +51,18 @@ class CreateAccountLogIn(unittest.TestCase):
         driver.find_element_by_name("password").clear()
         driver.find_element_by_name("password").send_keys("testpass")
         driver.find_element_by_xpath("//button[@type='submit']").click()
-        self.assertEqual("Logged in as selenium\nLog Out\nCreate Account\nLogin\nPrime Factorization\n\n\nSuccessfully logged in as selenium.",             
+
+        self.assertEqual("Logged in as selenium\nLog Out\nDelete Account\n"
+                            "Create Account\nLogin\nPrime Factorization\n\n\n"
+                            "Successfully logged in as selenium.",             
                             driver.find_element_by_xpath("//html").text)
+
         driver.find_element_by_xpath("//button[@type='submit']").click()
-        self.assertEqual("Create Account\nLogin\nPrime Factorization\n\n\n\n\n\nLog In", driver.find_element_by_xpath("//html").text)
+
+        self.assertEqual("Create Account\nLogin\nPrime Factorization"
+                         "\n\n\n\n\n\nLog In",
+                         driver.find_element_by_xpath("//html").text)
+
         driver.close()
     
     def is_element_present(self, how, what):

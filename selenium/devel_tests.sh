@@ -45,7 +45,23 @@ then
 fi
 
 
-# clean up database
-mysql -e "DELETE FROM test.users WHERE username = 'selenium';"
+# run test to make sure we can delete our test account
+python3 e2e-delete-account.py
+rv=$?
+if [[ $rv -ne 0 ]]
+then
+	echo "Failed account deletion test: exiting"
 
+	# clean up database
+	mysql -e "DELETE FROM test.users WHERE username = 'selenium';"
+	exit
+fi
+
+
+# clean up database
+#   (nothing needed here currently, since the last test above already deleted
+#    the test account)
+
+
+# inform tester of success
 echo "All tests passed!"
