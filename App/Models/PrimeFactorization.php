@@ -28,6 +28,9 @@ class PrimeFactorizationModel extends Model
 		shell_exec("python3 {$models_path}/make_factorization_file.py" .
 					" {$username} {$integer}");
 
+		shell_exec("python3 {$models_path}/make_factor_tree.py" .
+					" {$username} {$integer}");
+
 		// check for errors before this
 		$sql = 'INSERT INTO files' .
 				' (file_id, user_id, file_name, complete)' .
