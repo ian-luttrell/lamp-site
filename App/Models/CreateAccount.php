@@ -14,10 +14,12 @@ class CreateAccountModel extends Model
 		#   (so that this query is case sensitive).
 		# The hashed_password column can just be VARCHAR(255), because
 		#   the hashing is case-sensitive.
-		$sql = 'INSERT INTO users (id, username, hashed_password, created_at)' .
-				' VALUES (:id, :username, :hashed_password, :created_at);';
+		$sql = 'INSERT INTO users' .
+				' (user_id, username, hashed_password, created_at)' . 
+				' VALUES (:user_id, :username,' .
+							' :hashed_password, :created_at);';
 	
-		$params = ['id' => NULL, 
+		$params = ['user_id' => NULL, 
 					'username' => $username, 
 					'hashed_password' => $hashed_password, 
 					'created_at' => NULL];

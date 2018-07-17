@@ -9,7 +9,11 @@ require 'header.php';
 </head>
 
 <body>
+
 Welcome to the prime factorization utility, <?= htmlspecialchars($_SESSION['user']) ?>.
+<br><br>
+<?= $data['message'] ?>
+
 </body>
 
 </html>
