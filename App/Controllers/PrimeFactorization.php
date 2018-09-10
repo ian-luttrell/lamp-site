@@ -12,16 +12,19 @@ class PrimeFactorization
 		}
 
 		if (isset($_POST['submit_integer'])) {
-			$input = trim($_POST['submit_integer']);
-			if (filter_var($input, FILTER_VALIDATE_INT) !== false) {
+			$username = $_SESSION['user'];
+			//$input = explode(' ', $_POST['submit_integer'])[0];
+			$input = $_POST['submit_integer'];
+
+			if (preg_match('/^[1-9]+[0-9]*$/', $input)) {
 				$integer_to_factor = $input;
-				PrimeFactorizationModel::submitJob($_SESSION['user'],
+				PrimeFactorizationModel::submitJob($username,
 													$integer_to_factor);
 				
-				$data = ['message' => 'You have submitted an integer' .
-										' to factor. Please check back later' .
-										' to see whether the factorization has' .
-										' been completed.'];
+				$data = ['message' => 'You have submitted the integer ' .
+							$integer_to_factor . ' to be factored. Please' .
+							' check back later' . ' to see whether the' .
+							' factorization has been completed.'];
 				$view = '../App/Views/PrimeFactorization/submitted_integer.php';
 			} else {
 				$data = ['message' => 'You must provide an integer (containing' .
@@ -31,22 +34,28 @@ class PrimeFactorization
 			}
 
 		} else if (isset($_SESSION['user'])) {
+			$username = $_SESSION['user'];
 			$hasJobs = PrimeFactorizationModel::checkForExistingJobs(
 								$_SESSION['user']);
 
 			if ($hasJobs) {
-
 				$status = 'INCOMPLETE';
 
 				if ($status == 'INCOMPLETE') {
-				$data = ['message' =>
-							'Your number is still being factored.' .
-							' Please refresh the page or check back later.'];
-				$view = '../App/Views/PrimeFactorization/still_being_factored.php';
+					$data = ['message' =>
+								'Your number is still being factored.' .
+								' Please refresh the page or check back later.'];
+					$view = '../App/Views/PrimeFactorization/' .
+							'still_being_factored.php';
 				} else {
-				$data = ['message' =>
-							'The factors of {$your_number} are   '];
-				$view = '../App/Views/PrimeFactorization/factorization_completed.php';
+					$integer = '1';
+					$arr_of_factors = PrimeFactorizationModel::getFactorArray(
+										$username, $integer);
+					$data = ['message' =>
+								"The factors of {$integer} are: <br>",
+								'factors' => $arr_of_factors];
+					$view = '../App/Views/PrimeFactorization/' .
+							'factorization_completed.php';
 				}
 
 			} else {

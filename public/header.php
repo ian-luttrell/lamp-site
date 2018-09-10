@@ -23,6 +23,7 @@
 	<a href="/create-account">Create Account</a>
 	<a href="/login">Login</a>
 	<a href="/prime-factorization">Prime Factorization</a>
+    <a href="/data-analysis">Data Analysis</a>
 	</div>
 
 	<br><br>

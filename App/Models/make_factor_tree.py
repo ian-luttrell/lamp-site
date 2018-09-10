@@ -2,6 +2,7 @@
 
 from math import floor, sqrt
 import sys
+import mysql.connector
 
 
 def BinaryTree(r):
@@ -31,7 +32,7 @@ def getRightChild(root):
 
 def print_leaves(root):
 	if root[1] == [] and root[2] == []:
-		print('    ' + str(root[0]))
+		print(str(root[0]))
 	else:
 		print_leaves(root[1])
 		print_leaves(root[2])
@@ -39,7 +40,7 @@ def print_leaves(root):
 
 
 def is_prime(num):
-    print('    checking whether prime: ' + str(num))
+    print('checking whether prime: ' + str(num))
     if num % 2 == 0:
         candidate_divisor = 2
     else:
@@ -101,5 +102,15 @@ def main():
 	print('\n')
 	print_leaves(my_tree)
 
+	conn = mysql.connector.connect(host='localhost',database='test',
+				user='web',password='sesame')
+	cursor = conn.cursor()
+	# need to do WHERE user_id = ..., since file_name is not unique to user
+	query = "UPDATE test.files SET complete = 1 WHERE file_name = %s"
+	cursor.execute(query, [integer_to_factor])
+	conn.commit()
+
+	cursor.close()
+	conn.close()
 
 main()
