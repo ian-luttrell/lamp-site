@@ -6,7 +6,8 @@ class DataAnalysis
 {
 	public function index()
 	{
-		echo "<h1>Hello World!</h1>";
+		$view = '../App/Views/DataAnalysis/index.php';
+		View::render($view, []);
 	}
 }
 
